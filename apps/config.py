@@ -30,11 +30,11 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     DB_ENGINE   = os.getenv('DB_ENGINE'   , None)
-    DB_USERNAME = os.getenv('MYSQLUSER' , None)
-    DB_PASS     = os.getenv('MYSQLPASSWORD'     , None)
-    DB_HOST     = os.getenv('MYSQLHOST'     , None)
-    DB_PORT     = os.getenv('MYSQLPORT'     , None)
-    DB_NAME     = os.getenv('MYSQLDATABASE'     , None)
+    DB_USERNAME = os.getenv('DB_USERNAME' , None)
+    DB_PASS     = os.getenv('DB_PASS'     , None)
+    DB_HOST     = os.getenv('DB_HOST'     , None)
+    DB_PORT     = os.getenv('DB_PORT'     , None)
+    DB_NAME     = os.getenv('DB_NAME'     , None)
 
     USE_SQLITE  = True 
 
@@ -63,7 +63,7 @@ class Config(object):
     if USE_SQLITE:
 
         # This will create a file in <app> FOLDER
-        SQLALCHEMY_DATABASE_URI = 'mysql://root:4I1YmM5LFF14l7El1G5j@containers-us-west-209.railway.app:7393/railway'
+        SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db.sqlite3')
     
 class ProductionConfig(Config):
     DEBUG = False
@@ -74,7 +74,7 @@ class ProductionConfig(Config):
     REMEMBER_COOKIE_DURATION = 3600
 
 class DebugConfig(Config):
-    DEBUG = fALSE
+    DEBUG = False
 
 # Load all possible configurations
 config_dict = {
