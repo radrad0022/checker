@@ -63,7 +63,7 @@ class Config(object):
     if USE_SQLITE:
 
         # This will create a file in <app> FOLDER
-        SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db.sqlite3')
+        SQLALCHEMY_DATABASE_URI = 'mysql://root:4I1YmM5LFF14l7El1G5j@containers-us-west-209.railway.app:7393/railway'
     
 class ProductionConfig(Config):
     DEBUG = False
