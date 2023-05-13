@@ -1,0 +1,221 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+  <div class="pcoded-wrapper">
+    <div class="pcoded-content">
+      <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+          <div class="page-block">
+            <div class="row align-items-center">
+
+            </div>
+          </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+          <div class="page-wrapper">
+            <!-- [ Main Content ] start -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h5>Checker</h5>
+                  </div>
+                  <div class="card">
+                    <div class="card-body d-flex align-items-center justify-content-center">
+                      <textarea type="text" class="md-textarea form-control text-center" rows="10"
+                        placeholder="xxxxxxxxxxxxxxxxxxx|xx|xxxx|xxx" id="lista"></textarea>
+                    
+                    </div>
+                  </div>
+
+                  <div class="btn-group d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary mr-2" onclick=start()>Start</button>
+                    <button type="button" class="btn btn-danger">Stop</button>
+                  </div>
+
+                  <div style="margin-left: 10px; margin-right: 10px;" class="form-group mt-4 mb-0">
+                    <select class="form-control text-center" id="gate">
+                      <option value="null">Select Gate</option>
+                      <option value="gate1">STRIPE CHARGE</option>
+                      <option value="payeezy01.php" disabled>PAYEEZY-2 CHARGE</option>
+                      <option value="stripe04.php" disabled>Stripe-CCN CHARGE (NON 3D ONLY)</option>
+                      <option value="stripe003.php" disabled>Stripe-CCN CHARGE (NON 3D ONLY)</option>
+                      <option value="stripe006.php" disabled>Stripe-CCN CHARGE (NON 3D ONLY)</option>
+                      <option value="payflow-ccn.php" disabled>PAYFLOW(CCN)</option>
+                      <option value="ANZ.php" disabled>ANZ</option>
+                      <option value="payway.php" disabled>PAYWAY</option>
+                      <option value="MASS check.php" disabled>Fluid</option>
+                      <option value="stripe002.php" disabled></option>
+                    </select>
+                  </div>
+                  <br>
+                  <div class="card">
+
+                  </div>
+
+              <div class="row layout-top-spacing">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <button type="button" class="btn btn-block cvv-button">Live</button>
+                  <div class="widget widget-one_hybrid widget-followers cvv-widget">
+                    <div class="widget-heading">
+                  
+                    </div>
+                    <div id="cvv_approved" class="cvv-approved"></div>
+                  </div>
+                </div>
+               
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <button type="button" class="btn btn-block dead-button">Dead</button>
+                  <div class="widget widget-one_hybrid widget-referral dead-widget">
+                    <div class="widget-heading">
+                      
+                    </div>
+                    <div id="declined_cc" class="declined-cc"></div>
+                  </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                  <div class="row layout-top-spacing">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 cvv-lives-container" style="display: none">
+                      <div class="widget widget-one cvv-lives-widget">
+                        <div class="widget-heading">
+                          <h6 class="cvv-master"></h6>
+                        </div>
+                        <div id="cvv_lives" class="cvv-lives"></div>
+                      </div>
+                    </div>
+                    
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 dead-cc-container" style="display: none">
+                      <div class="widget widget-one dead-cc-widget">
+                        <div class="widget-heading">
+                          <h6 class="dead-master"></h6>
+                        </div>
+                        <div id="dead_cc" class="dead-cc"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+                <!-- [ Main Content ] end -->
+
+                {% endblock content %}
+
+                <!-- Specific Page JS goes HERE  -->
+                {% block javascripts %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".cvv-button").click(function() {
+      $(".cvv-widget").show();
+      $(".ccn-widget").hide();
+      $(".dead-widget").hide();
+      $(".cvv-lives-container").show();
+      $(".ccn-lives-container").hide();
+      $(".dead-cc-container").hide();
+    });
+
+    $(".ccn-button").click(function() {
+      $(".cvv-widget").hide();
+      $(".ccn-widget").show();
+      $(".dead-widget").hide();
+      $(".cvv-lives-container").hide()
+      $(".ccn-lives-container").show();
+      $(".dead-cc-container").hide();
+    });
+
+    $(".dead-button").click(function() {
+      $(".cvv-widget").hide();
+      $(".ccn-widget").hide();
+      $(".dead-widget").show();
+      $(".cvv-lives-container").hide();
+      $(".ccn-lives-container").hide();
+      $(".dead-cc-container").show();
+    });
+  });
+</script>
+<script type="text/javascript">
+    async function start() {
+        const lista = $("#lista");
+        const linhaenviar = lista.val().split("\n");
+        const total = linhaenviar.length - 1;
+        let tested = total;
+        let ap = 0;
+        let rp = 0;
+        let up = 0;
+
+        for (let index = 0; index < linhaenviar.length; index++) {
+            const value = linhaenviar[index];
+            const req = new XMLHttpRequest();
+
+            req.onreadystatechange = function () {
+                if (req.readyState === 4 && req.status === 200) {
+                    if (req.responseText.match("successfully")) {
+                        remove();
+                        ap++;
+                        tested--;
+                        cvvfunc(req.responseText + "");
+                    }
+                    else if (req.responseText.match("LIVE CCN")) {
+                        remove();
+                        rp++;
+                        tested--;
+                        ccnfunc(req.responseText + "");
+                    }
+                    else {
+                        remove();
+                        up++;
+                        tested--;
+                        deadfunc(req.responseText + "");
+                    }
+                }
+            }
+
+            const gate = $("#gate").val();
+            req.open("POST", gate, true);
+            req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            req.send("value=" + encodeURIComponent(value));
+
+            await sleep(10000); // wait 1 second between requests
+        }
+
+        function cvvfunc(str) {
+            $("#cvv_approved").append(str + "<br>");
+        }
+
+        function ccnfunc(str) {
+            $("#ccn_approved").append(str + "<br>");
+        }
+
+        function deadfunc(str) {
+            $("#declined_cc").append(str + "<br>");
+        }
+
+        function remove() {
+            const lines = lista.val().split('\n');
+            lines.splice(0, 1);
+            lista.val(lines.join("\n"));
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+    }
+</script>
+
+                {% endblock javascripts %}
