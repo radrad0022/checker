@@ -153,7 +153,7 @@ def internal_error(error):
 
 @blueprint.route('/gate1', methods=['POST'])
 def gate1():
-    gate = ['gate1', 'gate2', 'gate3', 'gate4', 'gate5', 'gate5', 'gate5']   
+    gate = ['gate1', 'gate2', 'gate3', 'gate4', 'gate5', 'gate6', 'gate7', 'gate8', 'gate9']   
     gate = random.choice(gate)
     print(gate)
     value = request.form.get('value')
@@ -168,9 +168,8 @@ def gate1():
     
     payload = json.dumps({"card": value})
     response = requests.request("POST", reqUrl, data=payload,  headers=headersList)
-    
-    message = find_between(response.text, '"message":"', '"')
     time.sleep(1)
+    message = find_between(response.text, '"message":"', '"')
     # message = response.json()['message']
     print(response.text)
     print(value)
