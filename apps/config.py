@@ -36,7 +36,7 @@ class Config(object):
     DB_PORT     = os.getenv('MYSQLPORT'     , None)
     DB_NAME     = os.getenv('MYSQLDATABASE'     , None)
 
-    USE_SQLITE  = False 
+    USE_SQLITE  = True 
 
     # try to set up a Relational DBMS
     if DB_ENGINE and DB_NAME and DB_USERNAME:
