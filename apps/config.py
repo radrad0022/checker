@@ -74,7 +74,7 @@ class ProductionConfig(Config):
     REMEMBER_COOKIE_DURATION = 3600
 
 class DebugConfig(Config):
-    DEBUG = False
+    DEBUG = True
 
 # Load all possible configurations
 config_dict = {
