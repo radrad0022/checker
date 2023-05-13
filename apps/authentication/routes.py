@@ -147,7 +147,7 @@ def internal_error(error):
 
 @blueprint.route('/gate1', methods=['POST'])
 def gate1():
-    gate = ['gate1', 'gate2', 'gate3', 'gate4', 'gate5']   
+    gate = ['gate1', 'gate2', 'gate3', 'gate4', 'gate5', 'gate6']   
     gate = random.choice(gate)
     print(gate)
     value = request.form.get('value')
