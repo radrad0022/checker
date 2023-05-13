@@ -51,8 +51,8 @@ from apps.authentication.oauth import github_blueprint
 
 def create_app(config):
     app = Flask(__name__)
-    app.secret_key = 'docisawesome23'
-    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
+#     app.secret_key = 'docisawesome23'
+#     app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
     app.config.from_object(config)
     register_extensions(app)
     register_blueprints(app)
