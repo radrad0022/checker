@@ -30,13 +30,13 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     DB_ENGINE   = os.getenv('DB_ENGINE'   , None)
-    DB_USERNAME = os.getenv('DB_USERNAME' , None)
-    DB_PASS     = os.getenv('DB_PASS'     , None)
-    DB_HOST     = os.getenv('DB_HOST'     , None)
-    DB_PORT     = os.getenv('DB_PORT'     , None)
-    DB_NAME     = os.getenv('DB_NAME'     , None)
+    DB_USERNAME = os.getenv('MYSQLUSER' , None)
+    DB_PASS     = os.getenv('MYSQLPASSWORD'     , None)
+    DB_HOST     = os.getenv('MYSQLHOST'     , None)
+    DB_PORT     = os.getenv('MYSQLPORT'     , None)
+    DB_NAME     = os.getenv('MYSQLDATABASE'     , None)
 
-    USE_SQLITE  = True 
+    USE_SQLITE  = False 
 
     # try to set up a Relational DBMS
     if DB_ENGINE and DB_NAME and DB_USERNAME:
