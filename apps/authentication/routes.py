@@ -170,6 +170,7 @@ def gate1():
     response = requests.request("POST", reqUrl, data=payload,  headers=headersList)
     
     message = find_between(response.text, '"message":"', '"')
+    time.sleep(1)
     # message = response.json()['message']
     print(response.text)
     print(value)
