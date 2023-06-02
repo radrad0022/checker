@@ -48,8 +48,8 @@ class Users(db.Model, UserMixin):
     def find_by_username(cls, username: str) -> "Users":
         return cls.query.filter_by(username=username).first()
     @classmethod
-    def check_allowed(cls, allowed: str) -> "Users":
-        return cls.query.filter_by(allowed='Yes').first()
+    def check_allowed(cls, username: str) -> "Users":
+        return cls.query.filter_by(username=username).filter(allowed='Yes').first()
     
     @classmethod
     def find_by_id(cls, _id: int) -> "Users":
