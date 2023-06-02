@@ -20,7 +20,7 @@ class Users(db.Model, UserMixin):
     username      = db.Column(db.String(64), unique=True)
     email         = db.Column(db.String(64), unique=True)
     password      = db.Column(db.LargeBinary)
-
+    allowed      = db.Column(db.Boolean, default=False)
     oauth_github  = db.Column(db.String(100), nullable=True)
 
     def __init__(self, **kwargs):
@@ -46,7 +46,7 @@ class Users(db.Model, UserMixin):
 
     @classmethod
     def find_by_username(cls, username: str) -> "Users":
-        return cls.query.filter_by(username=username).first()
+        return cls.query.filter_by(username=username).filter(User.allowed).first()
     
     @classmethod
     def find_by_id(cls, _id: int) -> "Users":
