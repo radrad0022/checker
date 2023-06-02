@@ -181,7 +181,7 @@ def gate1():
 def gate2():
 #     gate = ['gate1', 'gate2', 'gate3', 'gate4', 'gate5', 'gate6', 'gate7', 'gate8', 'gate9']   
 #     gate = random.choice(gate)
-    print(gate)
+#     print(gate)
     value = request.form.get('value')
     reqUrl = "https://cvv-fdata1.up.railway.app/runserver/"
     headersList = {
