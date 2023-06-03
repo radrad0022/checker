@@ -77,7 +77,7 @@ def login():
                                msg='Wrong user or password',
                                form=login_form)
 #     isallowed = Users.check_allowed(user_id)
-    if not current_user.is_authenticated and Users.check_allowed(user_id):
+    if not current_user.is_authenticated:
         return render_template('accounts/login.html',
                                form=login_form)
     return redirect(url_for('home_blueprint.index'))
