@@ -158,7 +158,7 @@
 
             req.onreadystatechange = function () {
                 if (req.readyState === 4 && req.status === 200) {
-                    if (req.responseText.match("approved") or req.responseText.match("Approved")) {
+                    if (req.responseText.match("Approved")) {
                         remove();
                         ap++;
                         tested--;
