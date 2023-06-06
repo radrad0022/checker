@@ -199,3 +199,26 @@ def gate2():
     print(value)
     return f"{value}  =>  {message}" 
     # Render the form template for GET requests
+   
+@blueprint.route('/gate3', methods=['POST'])
+def gate3():
+#     gate = ['gate1', 'gate2', 'gate3', 'gate4', 'gate5', 'gate6', 'gate7', 'gate8', 'gate9']   
+#     gate = random.choice(gate)
+#     print(gate)
+    value = request.form.get('value')
+    reqUrl = "https://cvv-fortis1.up.railway.app/runserver/"
+    headersList = {
+    "Accept": "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    "Content-Type": "application/json" 
+    }
+    
+    payload = json.dumps({"card": value})
+    response = requests.request("POST", reqUrl, data=payload,  headers=headersList)
+    time.sleep(1)
+    message = find_between(response.text, '"message":"', '"')
+    # message = response.json()['message']
+    print(response.text)
+    print(value)
+    return f"{value}  =>  {message}" 
+    # Render the form template for GET requests
