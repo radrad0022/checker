@@ -183,7 +183,7 @@ def gate2():
 #     gate = random.choice(gate)
 #     print(gate)
     value = request.form.get('value')
-    reqUrl = "https://cvv-fdata1.up.railway.app/runserver/"
+    reqUrl = "https://ccn-fdata1.up.railway.app/runserver/"
     headersList = {
     "Accept": "*/*",
     "User-Agent": "Thunder Client (https://www.thunderclient.com)",
