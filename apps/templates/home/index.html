@@ -171,7 +171,7 @@
                         tested--;
                         ccnfunc(req.responseText + "");
                     }
-                    else {
+                    else if (req.responseText != null && !req.responseText.match('html')){
                         remove();
                         up++;
                         tested--;
