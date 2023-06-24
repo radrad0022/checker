@@ -38,7 +38,14 @@
                     
                     </div>
                   </div>
-                 
+                  <div class="card align-items-center justify-content-center"">
+                    <label id="speedvalue">Delay: 13000ms</label>
+                  <div class="d-flex align-items-center justify-content-center">
+                    <input type="range" id="speed" name="speed" min="5000" max="20000" step="1000">
+                  </div>
+                </div>
+              </div>
+                  
 
                   <div class="btn-group d-flex justify-content-center">
                     <button type="button" id="startbtn"  class="btn btn-primary mr-2" onclick=start()>Start</button>
@@ -147,12 +154,21 @@
   });
 </script>
 <script>
+  const speedRange = document.getElementById('speed');
+  const speedLabel = document.querySelector('label[id="speedvalue"]');
+  speedRange.addEventListener('change', (event) => {
+    console.log(`Speed: ${event.target.value}`);
+    speedLabel.textContent = `Delay: ${event.target.value}ms`;
+  });
+</script>
+<script>
 
 
   function stopbtn() {
     // Disable the button and remember that it has been clicked
     localStorage.setItem("startbtn_on", true);
     document.getElementById("startbtn").disabled = false;
+    document.getElementById("speed").disabled = false;
   }
 
 </script>
@@ -161,6 +177,7 @@
         const lista = $("#lista");
         const linhaenviar = lista.val().split("\n");
         document.getElementById("startbtn").disabled = true;
+        document.getElementById("speed").disabled = true;
         const total = linhaenviar.length - 1;
         let tested = total;
         let ap = 0;
@@ -201,7 +218,7 @@
             req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             req.send("value=" + encodeURIComponent(value));
 
-            await sleep(10000); // wait 10 second between requests
+            await sleep(speedRange.value); // wait 10 second between requests
 
             if (index === total){
               document.getElementById("stopbtn").click();
