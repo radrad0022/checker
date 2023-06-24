@@ -171,7 +171,7 @@
                         tested--;
                         ccnfunc(req.responseText + "");
                     }
-                    else if (req.responseText != null && !req.responseText.match('html') && req.responseText.length > 5){
+                    else if (!req.responseText.match('null') && !req.responseText.match('html') && req.responseText.length > 5){
                         remove();
                         up++;
                         tested--;
