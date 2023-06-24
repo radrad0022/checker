@@ -2,6 +2,7 @@
 
 
 bind = '0.0.0.0:8585'
-workers = 4
+workers = 24
+debug = False
 accesslog = './logfile.log'
 errorlog = './error.log'
