@@ -210,6 +210,9 @@
                             tested--;
                             deadfunc(req.responseText + "");
                         }
+                      if (index === total){
+                        document.getElementById("stopbtn").click();
+                        }
                     }
                 }
               
@@ -220,9 +223,7 @@
 
             await sleep(speedRange.value); // wait 10 second between requests
 
-            if (index === total){
-              document.getElementById("stopbtn").click();
-            }
+            
         }
 
         function cvvfunc(str) {
