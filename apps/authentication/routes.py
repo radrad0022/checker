@@ -202,6 +202,7 @@ def gate2():
    
 @blueprint.route('/gate3', methods=['POST'])
 def gate3():
+    global gate_list
     if gate_list != None:
         gate = random.choice(gate_list)
     else:
