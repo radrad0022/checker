@@ -22,6 +22,9 @@ import time
 import random
 import requests
 from config import gate_list
+import os
+
+gate_list = os.environ.get('gate_list')
 # import jsonify
 def find_between( data, first, last ):
     try:
