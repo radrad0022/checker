@@ -202,8 +202,11 @@ def gate2():
    
 @blueprint.route('/gate3', methods=['POST'])
 def gate3():
-    gate = ['fortis1', 'fortis2', 'fortis3', 'fortis4', 'fortis5', 'fortis6', 'fortis7', 'fortis8', 'fortis9', 'fortis10', 'fortis11', 'fortis12', 'fortis13']   
-    gate = random.choice(gate)
+    if gate_list != None:
+        gate = random.choice(gate_list)
+    else:
+        gate = ['fortis1', 'fortis2', 'fortis3', 'fortis4', 'fortis5', 'fortis6', 'fortis7', 'fortis8', 'fortis9', 'fortis10', 'fortis11', 'fortis12', 'fortis13']   
+        gate = random.choice(gate)
 #     print(gate)
     value = request.form.get('value')
     reqUrl = f"https://cvv-{gate}.up.railway.app/runserver/"
