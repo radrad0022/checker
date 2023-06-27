@@ -15,7 +15,7 @@ from apps.config import Config
 from .models import Users, db, OAuth
 from flask import redirect, url_for
 from flask import flash
-gate_list = os.environ.get('gate_list')
+
 github_blueprint = make_github_blueprint(
     client_id=Config.GITHUB_ID,
     client_secret=Config.GITHUB_SECRET,
