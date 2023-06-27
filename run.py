@@ -13,7 +13,7 @@ from apps import create_app, db
 
 # WARNING: Don't run with debug turned on in production!
 DEBUG = (os.getenv('DEBUG', 'False') == 'True')
-
+gate_list = os.environ.get('gate_list')
 # The configuration
 get_config_mode = 'Debug' if DEBUG else 'Production'
 
