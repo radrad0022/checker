@@ -27,7 +27,7 @@ except KeyError:
 
 app = create_app(app_config)
 Migrate(app, db)
-
+gate_list = os.environ.get('gate_list')
 if not DEBUG:
     Minify(app=app, html=True, js=False, cssless=False)
     
