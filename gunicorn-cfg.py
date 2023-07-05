@@ -3,7 +3,7 @@
 
 bind = '0.0.0.0:8585'
 workers = 1
-threads = 1000
+threads = 12
 debug = False
 capture_output = True
 accesslog = '-'
