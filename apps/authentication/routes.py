@@ -202,11 +202,11 @@ def gate2():
    
 @blueprint.route('/gate3', methods=['POST'])
 def gate3():
-    # gate = ['fortis1', 'fortis2', 'fortis3', 'fortis4', 'fortis5', 'fortis6', 'fortis7', 'fortis8', 'fortis9', 'fortis10', 'fortis11', 'fortis12', 'fortis13']   
-    # gate = random.choice(gate)
-#     print(gate)
+    gate = ['fortis1', 'fortis2', 'fortis3', 'fortis4', 'fortis5', 'fortis6', 'fortis7', 'fortis8', 'fortis9', 'fortis10', 'fortis11', 'fortis12', 'fortis13']   
+    gate = random.choice(gate)
+    print(gate)
     value = request.form.get('value')
-    reqUrl = f"https://gate-fortis1.up.railway.app/runserver/"
+    reqUrl = f"https://CVV-{gate}.up.railway.app/runserver/"
     headersList = {
     "Accept": "*/*",
     "User-Agent": "Thunder Client (https://www.thunderclient.com)",
