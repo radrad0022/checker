@@ -32,8 +32,8 @@ def find_between( data, first, last ):
         return data[start:end]
     except ValueError:
         return None
-# user_id = request.form.get('user_id')
-userid = current_user.get_id()
+userid = request.form.get('user_id')
+# userid = current_user.get_id()
 semaphore = user_semaphores.setdefault(userid, threading.Semaphore(10))
 @blueprint.route('/')
 def route_default():
