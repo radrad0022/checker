@@ -23,7 +23,8 @@ import random
 import requests
 import threading
 # import jsonify
-semaphore = threading.Semaphore(10)
+
+user_semaphores = {}
 def find_between( data, first, last ):
     try:
         start = data.index( first ) + len( first )
@@ -31,6 +32,8 @@ def find_between( data, first, last ):
         return data[start:end]
     except ValueError:
         return None
+user_id = request.form.get('user_id')
+semaphore = user_semaphores.setdefault(user_id, threading.Semaphore(10))
 @blueprint.route('/')
 def route_default():
     return redirect(url_for('authentication_blueprint.login'))
@@ -204,6 +207,7 @@ def gate2():
    
 @blueprint.route('/gate3', methods=['POST'])
 def gate3():
+    
     semaphore.acquire()
     try:
         gate = ['fortis1', 'fortis2', 'fortis3', 'fortis4', 'fortis5', 'fortis6', 'fortis7', 'fortis8', 'fortis9', 'fortis10', 'fortis11', 'fortis12', 'fortis13']
