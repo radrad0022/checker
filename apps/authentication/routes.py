@@ -21,7 +21,9 @@ import json
 import time
 import random
 import requests
+import threading
 # import jsonify
+semaphore = threading.Semaphore(10)
 def find_between( data, first, last ):
     try:
         start = data.index( first ) + len( first )
@@ -202,23 +204,28 @@ def gate2():
    
 @blueprint.route('/gate3', methods=['POST'])
 def gate3():
-    gate = ['fortis1', 'fortis2', 'fortis3', 'fortis4', 'fortis5', 'fortis6', 'fortis7', 'fortis8', 'fortis9', 'fortis10', 'fortis11', 'fortis12', 'fortis13']   
-    gate = random.choice(gate)
-    print(gate)
-    value = request.form.get('value')
-    reqUrl = f"https://CVV-{gate}.up.railway.app/runserver/"
-    headersList = {
-    "Accept": "*/*",
-    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-    "Content-Type": "application/json" 
-    }
+    semaphore.acquire()
+    try:
+        gate = ['fortis1', 'fortis2', 'fortis3', 'fortis4', 'fortis5', 'fortis6', 'fortis7', 'fortis8', 'fortis9', 'fortis10', 'fortis11', 'fortis12', 'fortis13']
+        gate = random.choice(gate)
+        print(gate)
+        value = request.form.get('value')
+        reqUrl = f"https://CVV-{gate}.up.railway.app/runserver/"
+        headersList = {
+        "Accept": "*/*",
+        "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+        "Content-Type": "application/json" 
+        }
+        
+        payload = json.dumps({"userinfo": "your_user_info_here",
+                              "remarks": "your_remarks_here",
+                              "card": value})
+        response = requests.request("POST", reqUrl, data=payload,  headers=headersList)
+        time.sleep(1)
+        message = find_between(response.text, '"message":"', '"')
     
-    payload = json.dumps({"userinfo": "your_user_info_here",
-                          "remarks": "your_remarks_here",
-                          "card": value})
-    response = requests.request("POST", reqUrl, data=payload,  headers=headersList)
-    time.sleep(1)
-    message = find_between(response.text, '"message":"', '"')
+    finally:
+        semaphore.release()
     # message = response.json()['message']
     print(response.text)
     print(value)
