@@ -33,7 +33,8 @@ def find_between( data, first, last ):
     except ValueError:
         return None
 # user_id = request.form.get('user_id')
-semaphore = user_semaphores.setdefault(current_user.name, threading.Semaphore(10))
+userid = current_user.get_id()
+semaphore = user_semaphores.setdefault(userid, threading.Semaphore(10))
 @blueprint.route('/')
 def route_default():
     return redirect(url_for('authentication_blueprint.login'))
