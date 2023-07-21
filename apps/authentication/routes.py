@@ -213,7 +213,9 @@ def gate3():
     "Content-Type": "application/json" 
     }
     
-    payload = json.dumps({"card": value})
+    payload = json.dumps({"userinfo": "your_user_info_here",
+                              "remarks": "your_remarks_here",
+                              "card": value})
     response = requests.request("POST", reqUrl, data=payload,  headers=headersList)
     time.sleep(1)
     message = find_between(response.text, '"message":"', '"')
