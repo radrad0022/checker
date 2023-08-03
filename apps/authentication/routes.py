@@ -217,7 +217,6 @@ def gate3():
         value = request.form.get('value')
         reqUrl = f"https://ccn-{gate}.up.railway.app/runserver/"
         headersList = {
-        headersList = {
         "Accept": "*/*",
         "User-Agent": "Thunder Client (https://www.thunderclient.com)",
         "Content-Type": "application/json" 
