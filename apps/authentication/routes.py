@@ -202,7 +202,7 @@ def gate2():
    
 @blueprint.route('/gate3', methods=['POST'])
 def gate3():
-    gate = ['fdata01', 'fdata02', 'fdata03', 'fdata04']   
+    gate = ['fdata01', 'fdata02', 'fdata03', 'fdata04', 'fdata05', 'fdata06', 'fdata07']   
     gate = random.choice(gate)
     print(gate)
     value = request.form.get('value')
