@@ -206,31 +206,32 @@ def gate2():
    
 @blueprint.route('/gate3', methods=['POST'])
 def gate3():
-    userid = request.form.get('user_id')
+    # userid = request.form.get('user_id')
     # userid = current_user.get_id()
-    semaphore = user_semaphores.setdefault(userid, threading.Semaphore(15))
-    semaphore.acquire()
-    try:
-        gate = ['fdata01', 'fdata02', 'fdata03', 'fdata04', 'fdata05', 'fdata06', 'fdata07']   
-        gate = random.choice(gate)
-        print(gate)
-        value = request.form.get('value')
-        reqUrl = f"https://ccn-{gate}.up.railway.app/runserver/"
-        headersList = {
-        "Accept": "*/*",
-        "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-        "Content-Type": "application/json" 
-        }
+    # semaphore = user_semaphores.setdefault(userid, threading.Semaphore(15))
+    # semaphore.acquire()
+    # try:
+    gate = ['fdata01', 'fdata02', 'fdata03', 'fdata04', 'fdata05', 'fdata06', 'fdata07']   
+    gate = random.choice(gate)
+    print(gate)
+    value = request.form.get('value')
+    reqUrl = f"https://ccn-{gate}.up.railway.app/runserver/"
+    headersList = {
+    "Accept": "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    "Content-Type": "application/json" 
+    }
         
-        payload = json.dumps({"userinfo": "your_user_info_here",
+    payload = json.dumps({"userinfo": "your_user_info_here",
                               "remarks": "your_remarks_here",
                               "card": value})
-        response = requests.request("POST", reqUrl, data=payload,  headers=headersList)
-        time.sleep(1)
-        message = find_between(response.text, '"message":"', '"')
+    response = requests.request("POST", reqUrl, data=payload,  headers=headersList)
+    time.sleep(1)
+    message = find_between(response.text, '"message":"', '"')
     
-    finally:
-        semaphore.release()
+    # finally:
+    #     print("check done")
+        # semaphore.release()
     # message = response.json()['message']
     print(response.text)
     print(value)
